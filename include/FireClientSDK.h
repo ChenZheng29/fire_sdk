@@ -1,0 +1,47 @@
+//
+// Created by chenzheng on 24-11-11.
+//
+
+#ifndef FIRE_CLIENT_SDK_H
+#define FIRE_CLIENT_SDK_H
+
+#include <string>
+#include <thread>
+#include <atomic>
+#include <mutex>
+
+#include "DataDefine.h"
+
+class Client {
+  public:
+    explicit Client(std::string serverIP);
+    ~Client();
+
+    // 连接到服务器
+    bool connectToServer();
+
+    // 断开连接
+    void disconnect();
+
+    // 发送数据
+    bool sendCmd(const HighCmd& cmd) const;
+
+    // 获取数据
+    bool getState(HighState& state);
+
+    // 接收数据
+    void receiveThread();
+
+  private:
+    HighState state_{};
+    HighCmd cmd_{};
+
+    std::string serverIP_{};
+    int clientSocket_{};
+    std::thread receiveThread_;
+    std::atomic<bool> connected_;
+    std::mutex stateMutex_;
+};
+
+#endif // FIRE_CLIENT_SDK_H
+
