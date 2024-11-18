@@ -32,6 +32,9 @@ class Client {
     // 接收数据
     void receiveThread();
 
+    // 返回连接状态
+    bool isConnect() { return connected_; }
+
   private:
     HighState state_{};
     HighCmd cmd_{};

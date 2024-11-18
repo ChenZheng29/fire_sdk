@@ -53,11 +53,11 @@ typedef struct {
 } LowCmd; // low level control
 
 typedef struct {
-  bool motorEnable;    // After enable, motor will move to the lying position and lock
-  bool dampingEnable;  // After damping, motor will output damping
-  uint8_t stage;       // [0].lie                [1].stance          [2].locomotion
-  uint8_t mode;        // [0].normal locomotion  [1].blind crawling  [2].perceptive locomotion
-  uint8_t gait;        // [0].stance             [1].trot            [2].trot_flying
+  uint8_t state;              // [0].idle               [1].lie             [2].stance          [3].locomotion          [4].damping
+  uint8_t gait;               // [0].stance             [1].trot            [2].flying_trot
+  bool climbEnable;           // climb locomotion
+  bool perceptiveEnable;      // perceptive locomotion
+  bool continueEnable;        // continue enable
 
   // Body data
   std::array<float, 3> bodyPos;       // body position in world frame (unit: m) (Ps:from own odometry in world frame, usually drift)
@@ -75,27 +75,18 @@ typedef struct {
 } HighState; // high level feedback
 
 typedef struct {
-  bool motorEnable;    // After enable, motor will move to the lying position and lock
-  bool dampingEnable;  // After damping, motor will output damping
-  uint8_t stage;       // [0].lie                [1].stance          [2].locomotion
-  uint8_t mode;        // [0].normal locomotion  [1].blind crawling  [2].perceptive locomotion
-  uint8_t gait;        // [0].stance             [1].trot            [2].trot_flying
+  uint8_t state;              // [0].idle               [1].lie             [2].stance          [3].locomotion          [4].damping
+  uint8_t gait;               // [0].stance             [1].trot            [2].flying_trot
+  bool climbEnable;           // climb locomotion
+  bool perceptiveEnable;      // perceptive locomotion
+  bool continueEnable;        // continue enable
 
   float footSwingHeight; // foot swing height (unit: m, range: -0.06~0.03m, default: 0.09m)
   float bodyHeight; // body stance height (unit: m, range: -0.13~0.03m, default: 0.31m)
   float pitch; // body pitch angle (unit: rad, range: -0.3~0.3rad)
 
-  bool commandType; // false: velocity command  true: position command
-
   // velocity command
   std::array<float, 3> bodyVel; // xy linear velocity (unit: m/s) in body frame and yaw angular velocity (unit: rad/s) in world frame
-  // (range: trot         : vx:-0.8~0.8m/s, vy:-0.4~0.4m/s, vyaw:-1.5~1.5rad/s)
-  // (range: trot_flying  : vx:-1.6~1.6m/s, vy:-0.4~0.4m/s, vyaw:-1.5~1.5rad/s)
-
-  // position command
-  std::array<float, 3> goal; // desired xy position (unit: m) and yaw (unit: rad) in inertial frame
-  float forwardLinVel; // forward xy linear velocity (unit: m/s)
-  float forwardAngVel; // forward yaw angular velocity (unit: rad/s)
   // (range: trot         : vx:-0.8~0.8m/s, vy:-0.4~0.4m/s, vyaw:-1.5~1.5rad/s)
   // (range: trot_flying  : vx:-1.6~1.6m/s, vy:-0.4~0.4m/s, vyaw:-1.5~1.5rad/s)
 
