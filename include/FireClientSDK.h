@@ -5,6 +5,9 @@
 #ifndef FIRE_CLIENT_SDK_H
 #define FIRE_CLIENT_SDK_H
 
+#define SERVER_PORT 29575
+#define VERSION 1.1
+
 #include <string>
 #include <thread>
 #include <atomic>
@@ -34,6 +37,9 @@ class Client {
 
     // 返回连接状态
     bool isConnect() { return connected_; }
+
+    // 返回当前SDK版本
+    static double getVersion() { return VERSION; }
 
   private:
     HighState state_{};

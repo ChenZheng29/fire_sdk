@@ -8,6 +8,10 @@
 #include <unistd.h>
 
 int main() {
+  std::cout << "================" << std::endl;
+  std::cout << "  Version: " << Client::getVersion() << std::endl;
+  std::cout << "================" << std::endl;
+
   const std::string serverIP = "192.168.0.125"; // 替换为服务器的实际IP
   Client client(serverIP);
 
