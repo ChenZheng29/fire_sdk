@@ -48,6 +48,8 @@ int main() {
       cmd.state = 2;
     else if (input == "3")           // 运动状态
       cmd.state = 3;
+    else if (input == "4")           // 运动状态
+      cmd.state = 4;
     else if (input == "w")           // 前进
       cmd.bodyVel[0] += 0.4;
     else if (input == "s")           // 后退
@@ -78,9 +80,9 @@ int main() {
     cmd.gait = 1;
     cmd.bodyHeight = 0.5;
     cmd.footSwingHeight = 0.1;
-    cmd.bodyVel[0] = std::min(std::max(cmd.bodyVel[0], -0.8f), 0.8f);
-    cmd.bodyVel[1] = std::min(std::max(cmd.bodyVel[1], -0.4f), 0.4f);
-    cmd.bodyVel[2] = std::min(std::max(cmd.bodyVel[2], -1.4f), 1.4f);
+    cmd.bodyVel[0] = std::min(std::max(cmd.bodyVel[0], -0.8), 0.8);
+    cmd.bodyVel[1] = std::min(std::max(cmd.bodyVel[1], -0.4), 0.4);
+    cmd.bodyVel[2] = std::min(std::max(cmd.bodyVel[2], -1.4), 1.4);
   }
 
   return 0;
