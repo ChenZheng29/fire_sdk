@@ -48,8 +48,18 @@ int main() {
       cmd.state = 2;
     else if (input == "3")           // 运动状态
       cmd.state = 3;
-    else if (input == "4")           // 运动状态
+    else if (input == "4")           // 阻尼状态
       cmd.state = 4;
+    else if (input == "5")           // balance模式
+      cmd.mode = 0;
+    else if (input == "6")           // walk模式
+      cmd.mode = 1;
+    else if (input == "7")           // run模式
+      cmd.mode = 2;
+    else if (input == "8")           // climb模式
+      cmd.mode = 3;
+    else if (input == "9")           // perceptive模式
+      cmd.mode = 4;
     else if (input == "w")           // 前进
       cmd.bodyVel[0] += 0.4;
     else if (input == "s")           // 后退
@@ -68,8 +78,6 @@ int main() {
         std::cerr << "获取数据失败" << std::endl;
       else {
         std::cout << "state: " << static_cast<int>(highState.state) << std::endl;
-        const std::string gait[3] = {"stance", "trot", "flying_trot"};
-        std::cout << "gait: " << gait[highState.gait] << std::endl;
       }
       continue;
     } else {
@@ -77,9 +85,7 @@ int main() {
       continue;
     }
 
-    cmd.gait = 1;
     cmd.bodyHeight = 0.5;
-    cmd.footSwingHeight = 0.1;
     cmd.bodyVel[0] = std::min(std::max(cmd.bodyVel[0], -0.8), 0.8);
     cmd.bodyVel[1] = std::min(std::max(cmd.bodyVel[1], -0.4), 0.4);
     cmd.bodyVel[2] = std::min(std::max(cmd.bodyVel[2], -1.4), 1.4);

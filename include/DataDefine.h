@@ -54,9 +54,7 @@ typedef struct {
 
 typedef struct {
   uint8_t state;              // [0].idle               [1].lie             [2].stance          [3].locomotion          [4].damping
-  uint8_t gait;               // [0].stance             [1].trot            [2].flying_trot
-  bool climbEnable;           // climb locomotion
-  bool perceptiveEnable;      // perceptive locomotion
+  uint8_t mode;               // [0].balance            [1].walk            [2].run             [3].climb               [4].perceptive
   bool continueEnable;        // continue enable
 
   // Body data
@@ -76,13 +74,10 @@ typedef struct {
 
 typedef struct {
   uint8_t state;              // [0].idle               [1].lie             [2].stance          [3].locomotion          [4].damping
-  uint8_t gait;               // [0].stance             [1].trot            [2].flying_trot
-  bool climbEnable;           // climb locomotion
-  bool perceptiveEnable;      // perceptive locomotion
+  uint8_t mode;               // [0].balance            [1].walk            [2].run             [3].climb               [4].perceptive
   bool continueEnable;        // continue enable
 
-  double footSwingHeight; // foot swing height (unit: m, range: -0.06~0.03m, default: 0.09m)
-  double bodyHeight; // body stance height (unit: m, range: -0.13~0.03m, default: 0.31m)
+  double bodyHeight; // body stance height (unit: m, range: 0.20~0.40m, default: 0.31m)
   double pitch; // body pitch angle (unit: rad, range: -0.3~0.3rad)
 
   // velocity command
@@ -94,3 +89,4 @@ typedef struct {
 } HighCmd; // high level control
 
 #endif //FIRE_SDK_LIB_INCLUDE_DATA_DEFINE_H_
+
