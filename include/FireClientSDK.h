@@ -6,7 +6,7 @@
 #define FIRE_CLIENT_SDK_H
 
 #define SERVER_PORT 29575
-#define VERSION 1.1
+#define VERSION 1.2
 
 #include <string>
 #include <thread>

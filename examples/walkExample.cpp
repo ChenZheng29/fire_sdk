@@ -12,7 +12,7 @@ int main() {
   std::cout << "  Version: " << Client::getVersion() << std::endl;
   std::cout << "================" << std::endl;
 
-  const std::string serverIP = "192.168.0.125"; // 替换为服务器的实际IP
+  const std::string serverIP = "172.17.0.1"; // 替换为服务器的实际IP
   Client client(serverIP);
 
   if (!client.connectToServer()) {
@@ -24,6 +24,7 @@ int main() {
   std::cout << "输入要发送的命令：" << std::endl;
 
   HighCmd cmd{};
+  cmd.bodyHeight = 0.5;
 
   auto f = [&]() {
     while (client.isConnect()) {
@@ -78,6 +79,12 @@ int main() {
         std::cerr << "获取数据失败" << std::endl;
       else {
         std::cout << "state: " << static_cast<int>(highState.state) << std::endl;
+        std::cout << "mode: " << static_cast<int>(highState.mode) << std::endl;
+        std::cout << "body linear velocity x: " << highState.bodyLinVel[0] << std::endl;
+        std::cout << "LF joint pos: " << highState.jointPos[0] << " " << highState.jointPos[1] << " " << highState.jointPos[2] << std::endl;
+        std::cout << "batteryV: " << highState.batteryV << std::endl;
+        std::cout << "LF motor temperature: " << highState.motorTemp[0] << " " << highState.motorTemp[1] << " " << highState.motorTemp[2] <<
+            std::endl;
       }
       continue;
     } else {
@@ -85,7 +92,6 @@ int main() {
       continue;
     }
 
-    cmd.bodyHeight = 0.5;
     cmd.bodyVel[0] = std::min(std::max(cmd.bodyVel[0], -0.8), 0.8);
     cmd.bodyVel[1] = std::min(std::max(cmd.bodyVel[1], -0.4), 0.4);
     cmd.bodyVel[2] = std::min(std::max(cmd.bodyVel[2], -1.4), 1.4);

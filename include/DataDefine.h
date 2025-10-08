@@ -53,13 +53,14 @@ typedef struct {
 } LowCmd; // low level control
 
 typedef struct {
+  // Current status
   uint8_t state;              // [0].idle               [1].lie             [2].stance          [3].locomotion          [4].damping
   uint8_t mode;               // [0].balance            [1].walk            [2].run             [3].climb               [4].perceptive
   bool continueEnable;        // continue enable
 
-  // Body data
+  // Body odometry
   std::array<double, 3> bodyPos;       // body position in world frame (unit: m) (Ps:from own odometry in world frame, usually drift)
-  std::array<double, 4> bodyOri;       // body orientation in world frame (unit: quaternion)
+  std::array<double, 4> bodyOri;       // body orientation in world frame (unit: quaternion [x y z w])
   std::array<double, 3> bodyLinVel;    // body linear velocity in base frame (unit: m/s)
   std::array<double, 3> bodyAngVel;    // body angular velocity in base frame (unit: rad/s)
 
@@ -67,7 +68,12 @@ typedef struct {
   std::array<double, 12> jointPos;     // joint position (unit: rad)
   std::array<double, 12> jointVel;     // joint velocity (unit: rad/s)
   std::array<double, 12> jointTau;     // joint torque (unit: Nm)
-  std::array<double, 4> footForce;     // data from joint torque compute
+
+  // Battery voltage
+  double batteryV;    // battery voltage (unit: V)
+
+  // Motor temperature
+  std::array<double, 12> motorTemp;    // motor temperature (unit: °C)
 
   uint32_t crc;
 } HighState; // high level feedback
@@ -77,7 +83,7 @@ typedef struct {
   uint8_t mode;               // [0].balance            [1].walk            [2].run             [3].climb               [4].perceptive
   bool continueEnable;        // continue enable
 
-  double bodyHeight; // body stance height (unit: m, range: 0.20~0.40m, default: 0.31m)
+  double bodyHeight; // body stance height (unit: m, range: 0.20~0.50m)
   double pitch; // body pitch angle (unit: rad, range: -0.3~0.3rad)
 
   // velocity command
@@ -89,4 +95,3 @@ typedef struct {
 } HighCmd; // high level control
 
 #endif //FIRE_SDK_LIB_INCLUDE_DATA_DEFINE_H_
-
