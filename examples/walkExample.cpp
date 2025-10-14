@@ -12,7 +12,7 @@ int main() {
   std::cout << "  Version: " << Client::getVersion() << std::endl;
   std::cout << "================" << std::endl;
 
-  const std::string serverIP = "172.17.0.1"; // 替换为服务器的实际IP
+  const std::string serverIP = "192.168.29.100"; // 替换为服务器的实际IP
   Client client(serverIP);
 
   if (!client.connectToServer()) {
