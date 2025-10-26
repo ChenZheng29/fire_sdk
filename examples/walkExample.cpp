@@ -83,6 +83,8 @@ int main() {
         std::cout << "body linear velocity x: " << highState.bodyLinVel[0] << std::endl;
         std::cout << "LF joint pos: " << highState.jointPos[0] << " " << highState.jointPos[1] << " " << highState.jointPos[2] << std::endl;
         std::cout << "batteryV: " << highState.batteryV << std::endl;
+        std::cout << "batteryLevel: " << highState.batteryLevel << std::endl;
+        std::cout << "batteryIsCharging: " << highState.isCharging << std::endl;
         std::cout << "LF motor temperature: " << highState.motorTemp[0] << " " << highState.motorTemp[1] << " " << highState.motorTemp[2] <<
             std::endl;
       }

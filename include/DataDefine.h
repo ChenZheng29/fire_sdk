@@ -70,7 +70,9 @@ typedef struct {
   std::array<double, 12> jointTau;     // joint torque (unit: Nm)
 
   // Battery voltage
-  double batteryV;    // battery voltage (unit: V)
+  double batteryV;        // battery voltage (unit: V)
+  double batteryLevel;    // battery level (unit: 0% ~ 100%)
+  bool isCharging;        // is charging
 
   // Motor temperature
   std::array<double, 12> motorTemp;    // motor temperature (unit: °C)
