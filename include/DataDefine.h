@@ -77,6 +77,9 @@ typedef struct {
   // Motor temperature
   std::array<double, 12> motorTemp;    // motor temperature (unit: °C)
 
+  // Remote mode
+  bool remoteMode; // true: in remote mode | false: in joystick mode (joystick switch)
+
   uint32_t crc;
 } HighState; // high level feedback
 

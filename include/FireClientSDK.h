@@ -5,11 +5,7 @@
 #ifndef FIRE_CLIENT_SDK_H
 #define FIRE_CLIENT_SDK_H
 
-#define SERVER_PORT 29575
-#define VERSION 1.3
-
 #include <string>
-#include <thread>
 #include <atomic>
 #include <mutex>
 
@@ -17,7 +13,7 @@
 
 class Client {
   public:
-    explicit Client(std::string serverIP);
+    explicit Client(std::string serverIP, bool debug);
     ~Client();
 
     // 连接到服务器
@@ -36,20 +32,23 @@ class Client {
     void receiveThread();
 
     // 返回连接状态
-    bool isConnect() { return connected_; }
+    bool isConnect();
 
     // 返回当前SDK版本
-    static double getVersion() { return VERSION; }
+    static double getVersion();
 
   private:
+    bool checkConnection() const;
+
     HighState state_{};
     HighCmd cmd_{};
 
     std::string serverIP_{};
     int clientSocket_{};
-    std::thread receiveThread_;
     std::atomic<bool> connected_;
     std::mutex stateMutex_;
+
+    bool debug_{};
 };
 
 #endif // FIRE_CLIENT_SDK_H
