@@ -39,12 +39,12 @@ int main() {
     auto connectThreadFunc = [&]() {
         while (running) {
             if (!client.isConnect()) {
-                std::cout << "尝试连接服务器 " << serverIP << " ..." << std::endl;
+                std::cout << "> 尝试连接服务器 " << serverIP << " ..." << std::endl;
 
                 if (client.connectToServer())
-                    std::cout << "成功连接到服务器 " << serverIP << std::endl;
+                    std::cout << "√ 成功连接到服务器 " << serverIP << std::endl;
                 else
-                    std::cout << "无法连接到服务器 " << serverIP << std::endl;
+                    std::cout << "× 无法连接到服务器 " << serverIP << std::endl;
             }
             sleep(1); // 每1秒尝试连接一次
         }

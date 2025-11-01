@@ -23,7 +23,7 @@ class Client {
     void disconnect();
 
     // 发送数据
-    bool sendCmd(const HighCmd& cmd) const;
+    bool sendCmd(const HighCmd& cmd);
 
     // 获取数据
     bool getState(HighState& state);
